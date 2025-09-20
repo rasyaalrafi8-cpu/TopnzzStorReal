@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Produk - Warna Warni 3D</title>
+    <style>
+        /* Variabel warna untuk tema warna-warni */
+        :root {
+            --color-1: #ff6b6b;
+            --color-2: #4ecdc4;
+            --color-3: #ffbe0b;
+            --color-4: #7e57c2;
+            --color-5: #ff8a65;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #333;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, var(--color-1), var(--color-2), var(--color-3), var(--color-4), var(--color-5));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientMove 5s ease infinite;
+            background-size: 300% 300%;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-category {
+            margin-bottom: 40px;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow);
+            transform: perspective(500px) rotateX(10deg);
+            transition: all 0.3s ease;
+        }
+
+        .category-title:hover {
+            transform: perspective(500px) rotateX(0deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover::before {
+            transform: translateY(0);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .btn-channel {
+            background: linear-gradient(45deg, #7289DA, #4E5D94);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+        }
+
+        /* Warna berbeda untuk setiap kategori */
+        .unchek-biasa .category-title { background: linear-gradient(45deg, var(--color-1), var(--color-5)); }
+        .unchek-vip .category-title { background: linear-gradient(45deg, var(--color-3), var(--color-1)); }
+        .top-up-ff .category-title { background: linear-gradient(45deg, var(--color-2), var(--color-4)); }
+        .membership-ff .category-title { background: linear-gradient(45deg, var(--color-4), var(--color-2)); }
+        .pp-saluran .category-title { background: linear-gradient(45deg, var(--color-5), var(--color-3)); }
+        .lainnya .category-title { background: linear-gradient(45deg, var(--color-1), var(--color-4)); }
+
+        /* Efek 3D untuk kartu produk berdasarkan kategori */
+        .unchek-biasa .product-card { border-left: 5px solid var(--color-1); }
+        .unchek-vip .product-card { border-left: 5px solid var(--color-3); }
+        .top-up-ff .product-card { border-left: 5px solid var(--color-2); }
+        .membership-ff .product-card { border-left: 5px solid var(--color-4); }
+        .pp-saluran .product-card { border-left: 5px solid var(--color-5); }
+        .lainnya .product-card { border-left: 5px solid var(--color-1); }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DAFTAR PRODUK</h1>
+        </header>
+
+        <div class="product-category unchek-biasa">
+            <h2 class="category-title">UNCHEK BIASA</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-name">10 UNCHEK 2K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">15 UNCHEK 5K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">20 UNCHEK 10K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">25 UNCHEK 15K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">30 UNCHEK 20K</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-category unchek-vip">
+            <h2 class="category-title">UNCHEK VIP</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-name">5 UNCHEK 5K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">10 UNCHEK 10K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">20 UNCHEK 15K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">30 UNCHEK 20K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">40 UNCHEK 25K</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-category top-up-ff">
+            <h2 class="category-title">TOP UP FF</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-name">50 DIAMOND 7K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">70 DIAMOND 9K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">80 DIAMOND 11K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">100 DIAMOND 13K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">140 DIAMOND 18K</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-category membership-ff">
+            <h2 class="category-title">MEMBERSHIP FF</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-name">MEMBERSHIP MINGGUAN 30K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">MEMBERSHIP BULANAN 90K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">FREE FIRE BP CARD 45K</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-category pp-saluran">
+            <h2 class="category-title">PP SALURAN</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-name">2.000 = 35 PENGIKUT</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">5.000 = 125 PENGIKUT</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">10.000 = 250 PENGIKUT</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">15.000 = 450 PENGIKUT</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">20.000 = 550 PENGIKUT</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">25.000 = 630 PENGIKUT</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-category lainnya">
+            <h2 class="category-title">LAINNYA</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-name">OPEN PT JASTEB 15K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">MURNOK (MURID NOKOS) 10K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">MURSUN (MURID SUNTIK) 10K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">APK QRIS NO KTP 2K</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">JASA BUAT STIKER JB - WA AJA</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-name">JASA BUAT LOGO JB - WA AJA</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons-container">
+            <a href="https://wa.me/+6288215305048" class="btn btn-whatsapp">
+                Hubungi WhatsApp
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbBIwVaK0IBnCGOHpf2K" class="btn btn-channel">
+                Ikuti Saluran
+            </a>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 Daftar Produk. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
